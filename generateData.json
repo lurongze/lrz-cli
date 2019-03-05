@@ -1,0 +1,10 @@
+{
+  "generateData": [
+    { "key": "title", "name": "标题", "type": "number" },
+    { "key": "description", "name": "描述", "type": "varchar" },
+    { "key": "picture", "name": "头图", "type": "picture" },
+    { "key": "pictures", "name": "轮播图", "type": "pictures" },
+    { "key": "createTime", "name": "时间", "type": "time" },
+    { "key": "content", "name": "内容", "type": "editor" }
+  ]
+}

@@ -1,7 +1,27 @@
 <template>
   <div>
     <el-form ref="form" :model="form" label-width="120px" :rules="rules" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
-      ${formItem}
+      
+      <el-form-item label="标题" prop="title">
+        <el-input-number v-model="form.title"></el-input-number>
+      </el-form-item>
+      
+      <el-form-item label="描述" prop="description">
+        <el-input v-model="form.description"></el-input>
+      </el-form-item>
+      
+      <el-form-item label="头图">
+        <ImageUpload :image.sync="form.picture" />
+      </el-form-item>
+      
+      <el-form-item label="轮播图">
+        <ImagesUpload :images.sync="form.pictures" :limit="15" />
+      </el-form-item>
+      
+      <el-form-item label="内容" prop="content">
+        <Editor :default-content="form.content" ref="content_editor" />
+      </el-form-item>
+      
       <el-form-item>
         <el-button type="primary" @click="submit" :loading="loading">保存</el-button>
         <el-button @click.native.prevent="$router.go(-1)">取消</el-button>
@@ -11,19 +31,24 @@
 </template>
 
 <script>
-${importStr}
+import ImageUpload from '../common/ImageUpload';
+import ImagesUpload from '../common/ImagesUpload';
+import Editor from '../common/Editor';
 
 // 这里的参数要根据情况修改
-let serviceLinkBase = '${serviceLinkBaseStr}'; // 接口请求的路径
+let serviceLinkBase = '/t/app/index'; // 接口请求的路径
 let listPath = '${serviceLinkBaseStr}'; // 列表的路由，修改成功后跳转
 
 export default {
-  name: "${NAME}",
-  components: {${componentsStr}},
+  name: "index",
+  components: {ImageUpload,ImagesUpload,Editor},
   data(){
     return {
       loading:false,
-      form:{${formData}
+      form:{
+        title:0,
+        description:'',
+        content:''
       },
       rules:{
       }
@@ -66,7 +91,7 @@ export default {
             tip = "新增";
           }
 
-          ${formEditorGet}
+          this.form.content = this.$refs.content_editor.getContent();
 
           this.$axios.post(serviceLink,this.form)
             .then((response) => {
@@ -87,7 +112,7 @@ export default {
       }).then((response) => {
         let res = response.data;
         this.form = res.data;
-        ${formEditorSet}
+        this.$refs.content_editor.setContent(this.form.content);
       })
     }
   }

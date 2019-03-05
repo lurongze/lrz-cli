@@ -1,17 +1,15 @@
 {
-  "name": "lrz-cli",
+  "name": "mylike-cli",
   "version": "1.0.0",
   "description": "lrz-cli",
   "main": "index.js",
   "bin": {
-    "lrz-cli": "./index.js"
+    "mylike-cli": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "oracledb": "^3.1.2"
-  }
+  "dependencies": {}
 }
